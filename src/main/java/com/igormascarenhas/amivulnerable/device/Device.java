@@ -1,10 +1,15 @@
 package com.igormascarenhas.amivulnerable.device;
 
+import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
+
+import java.util.List;
+
 public class Device {
     private String id;
     private String os;
     private String os_version;
     private String model;
+    private List<Vulnerability> vulnerabilities;
 
     public Device() {
     }
@@ -27,6 +32,21 @@ public class Device {
         this.os = os;
         this.os_version = os_version;
         this.model = model;
+    }
+
+    public Device(String id, String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
+        this.id = id;
+        this.os = os;
+        this.os_version = os_version;
+        this.model = model;
+        this.vulnerabilities = vulnerabilities;
+    }
+
+    public Device(String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
+        this.os = os;
+        this.os_version = os_version;
+        this.model = model;
+        this.vulnerabilities = vulnerabilities;
     }
 
     public String getId() {
@@ -61,6 +81,14 @@ public class Device {
         this.model = model;
     }
 
+    public List<Vulnerability> getVulnerabilities() {
+        return vulnerabilities;
+    }
+
+    public void setVulnerabilities(List<Vulnerability> vulnerabilities) {
+        this.vulnerabilities = vulnerabilities;
+    }
+
     @Override
     public String toString() {
         return "Device{" +
@@ -68,6 +96,7 @@ public class Device {
                 ", os='" + os + '\'' +
                 ", os_version='" + os_version + '\'' +
                 ", model='" + model + '\'' +
+                ", vulnerabilities=" + vulnerabilities +
                 '}';
     }
 }
