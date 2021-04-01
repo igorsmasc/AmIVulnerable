@@ -2,21 +2,30 @@ package com.igormascarenhas.amivulnerable.device;
 
 import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Device {
-    private String id;
+
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String os;
     private String os_version;
     private String model;
+
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = Vulnerability.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "dv_fk", referencedColumnName = "id")
     private List<Vulnerability> vulnerabilities;
-    private List<Vulnerability> result;
+//    private List<Vulnerability> result;
 
     public Device() {
     }
 
     public Device(
-            String id,
+            Integer id,
             String os,
             String os_version,
             String model) {
@@ -35,7 +44,7 @@ public class Device {
         this.model = model;
     }
 
-    public Device(String id, String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
+    public Device(Integer id, String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
         this.id = id;
         this.os = os;
         this.os_version = os_version;
@@ -50,11 +59,11 @@ public class Device {
         this.vulnerabilities = vulnerabilities;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,6 +91,7 @@ public class Device {
         this.model = model;
     }
 
+
     public List<Vulnerability> getVulnerabilities() {
         return vulnerabilities;
     }
@@ -90,13 +100,25 @@ public class Device {
         this.vulnerabilities = vulnerabilities;
     }
 
-    public List<Vulnerability> getResult() {
-        return result;
-    }
+//    public List<Vulnerability> getResult() {
+//        return result;
+//    }
+//
+//    public void setResult(List<Vulnerability> result) {
+//        this.result = result;
+//    }
 
-    public void setResult(List<Vulnerability> result) {
-        this.result = result;
-    }
+//    @Override
+//    public String toString() {
+//        return "Device{" +
+//                "id='" + id + '\'' +
+//                ", os='" + os + '\'' +
+//                ", os_version='" + os_version + '\'' +
+//                ", model='" + model + '\'' +
+//                ", vulnerabilities=" + vulnerabilities +
+//                ", result=" + result +
+//                '}';
+//    }
 
     @Override
     public String toString() {
@@ -106,7 +128,6 @@ public class Device {
                 ", os_version='" + os_version + '\'' +
                 ", model='" + model + '\'' +
                 ", vulnerabilities=" + vulnerabilities +
-                ", result=" + result +
                 '}';
     }
 }

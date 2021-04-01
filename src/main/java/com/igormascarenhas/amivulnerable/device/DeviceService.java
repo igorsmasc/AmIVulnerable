@@ -9,7 +9,7 @@ import java.util.List;
 public class DeviceService {
 
     public Device getDevice() {
-        return new Device("1", "android", "10", "s10", List.of(new Vulnerability("1", "utiliza estações de carregamento", 1)));
+        return new Device(1, "android", "10", "s10", List.of(new Vulnerability(1, "utiliza estações de carregamento", 1)));
     }
 
 }

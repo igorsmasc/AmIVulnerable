@@ -2,20 +2,29 @@ package com.igormascarenhas.amivulnerable.user;
 
 import com.igormascarenhas.amivulnerable.device.Device;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "\"User\"")
 public class User {
 
-    private String id;
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String email;
     private String password;
     private String name;
+
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = Device.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ud_fk", referencedColumnName = "id")
     private List<Device> devices;
 
     public User() {
     }
 
-    public User(String id, String email, String password, String name, List<Device> devices) {
+    public User(Integer id, String email, String password, String name, List<Device> devices) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -30,11 +39,11 @@ public class User {
         this.devices = devices;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
