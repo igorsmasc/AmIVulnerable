@@ -10,6 +10,7 @@ public class Device {
     private String os_version;
     private String model;
     private List<Vulnerability> vulnerabilities;
+    private List<Vulnerability> result;
 
     public Device() {
     }
@@ -89,6 +90,14 @@ public class Device {
         this.vulnerabilities = vulnerabilities;
     }
 
+    public List<Vulnerability> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Vulnerability> result) {
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "Device{" +
@@ -97,6 +106,7 @@ public class Device {
                 ", os_version='" + os_version + '\'' +
                 ", model='" + model + '\'' +
                 ", vulnerabilities=" + vulnerabilities +
+                ", result=" + result +
                 '}';
     }
 }
