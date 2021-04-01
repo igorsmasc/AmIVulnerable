@@ -5,6 +5,7 @@ import com.igormascarenhas.amivulnerable.device.Device;
 import java.util.List;
 
 public class User {
+
     private String id;
     private String email;
     private String password;
