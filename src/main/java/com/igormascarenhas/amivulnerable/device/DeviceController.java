@@ -3,10 +3,9 @@ package com.igormascarenhas.amivulnerable.device;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -21,10 +20,22 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
+    @GetMapping("/devices")
+    @ApiOperation(value = "GET ALL DEVICES")
+    public List<Device> getDevices() {
+        return deviceService.getDevices();
+    }
+
     @GetMapping("/device")
     @ApiOperation(value = "GET DEVICE BY ID")
     public Device getDevice() {
         return deviceService.getDevice();
+    }
+
+    @PostMapping("/device")
+    @ApiOperation(value = "REGISTER A NEW DEVICE")
+    public void registerNewDevice(@RequestBody Device device) {
+        deviceService.addNewDevice(device);
     }
 
 }

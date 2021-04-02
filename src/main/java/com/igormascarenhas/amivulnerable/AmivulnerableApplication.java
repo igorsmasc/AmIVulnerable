@@ -1,6 +1,7 @@
 package com.igormascarenhas.amivulnerable;
 
 import com.igormascarenhas.amivulnerable.device.Device;
+import com.igormascarenhas.amivulnerable.device.DeviceRepository;
 import com.igormascarenhas.amivulnerable.user.User;
 import com.igormascarenhas.amivulnerable.user.UserRepository;
 import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
@@ -17,11 +18,13 @@ public class AmivulnerableApplication implements CommandLineRunner {
 
 	private final VulnerabilityRepository vulnerabilityRepository;
 	private final UserRepository userRepository;
+	private final DeviceRepository deviceRepository;
 
 	@Autowired
-	public AmivulnerableApplication(VulnerabilityRepository vulnerabilityRepository, UserRepository userRepository) {
+	public AmivulnerableApplication(VulnerabilityRepository vulnerabilityRepository, UserRepository userRepository, DeviceRepository deviceRepository) {
 		this.vulnerabilityRepository = vulnerabilityRepository;
 		this.userRepository = userRepository;
+		this.deviceRepository = deviceRepository;
 	}
 
 	public static void main(String[] args) {
@@ -49,5 +52,6 @@ public class AmivulnerableApplication implements CommandLineRunner {
 
 		vulnerabilityRepository.saveAll(List.of(v1, v2, v3));
 		userRepository.saveAll(List.of(igor, amanda));
+		deviceRepository.saveAll(List.of(d1, d2));
 	}
 }
