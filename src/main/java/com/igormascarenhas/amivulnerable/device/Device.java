@@ -9,7 +9,7 @@ import java.util.List;
 public class Device {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     private String os;
     private String os_version;

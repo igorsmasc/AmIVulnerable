@@ -1,12 +1,17 @@
 package com.igormascarenhas.amivulnerable.device;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api/device")
+@RequestMapping(path = "/api")
+@Api(value = "REST API - DEVICE")
+@CrossOrigin(origins = "*") //All domains can access it
 public class DeviceController {
 
     private final DeviceService deviceService;
@@ -16,7 +21,8 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
-    @GetMapping
+    @GetMapping("/device")
+    @ApiOperation(value = "Get device by id")
     public Device getDevice() {
         return deviceService.getDevice();
     }
