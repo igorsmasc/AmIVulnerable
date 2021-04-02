@@ -22,7 +22,7 @@ public class DeviceController {
     }
 
     @GetMapping("/device")
-    @ApiOperation(value = "Get device by id")
+    @ApiOperation(value = "GET DEVICE BY ID")
     public Device getDevice() {
         return deviceService.getDevice();
     }
