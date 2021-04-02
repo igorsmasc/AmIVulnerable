@@ -38,4 +38,8 @@ public class DeviceController {
         deviceService.addNewDevice(device);
     }
 
+    @DeleteMapping(path = "/device/{deviceId}")
+    public void deleteDevice(@PathVariable("deviceId") Integer id) {
+        deviceService.deleteDevice(id);
+    }
 }

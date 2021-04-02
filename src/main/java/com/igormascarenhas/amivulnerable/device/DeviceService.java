@@ -28,4 +28,12 @@ public class DeviceService {
         deviceRepository.save(device);
     }
 
+    public void deleteDevice(Integer deviceId) {
+        boolean exists = deviceRepository.existsById(deviceId);
+        if(!exists) {
+            throw new IllegalStateException("Device with id " + deviceId + " does not exists.");
+        }
+        deviceRepository.deleteById(deviceId);
+    }
+
 }
