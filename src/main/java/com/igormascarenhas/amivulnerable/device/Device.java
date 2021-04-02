@@ -44,14 +44,6 @@ public class Device {
         this.model = model;
     }
 
-    public Device(Integer id, String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
-        this.id = id;
-        this.os = os;
-        this.os_version = os_version;
-        this.model = model;
-        this.vulnerabilities = vulnerabilities;
-    }
-
     public Device(String os, String os_version, String model, List<Vulnerability> vulnerabilities) {
         this.os = os;
         this.os_version = os_version;

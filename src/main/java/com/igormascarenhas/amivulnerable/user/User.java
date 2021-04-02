@@ -24,19 +24,17 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String email, String password, String name, List<Device> devices) {
+    public User(Integer id, String email, String password, String name) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
-        this.devices = devices;
     }
 
-    public User(String email, String password, String name, List<Device> devices) {
+    public User(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.devices = devices;
     }
 
     public Integer getId() {
