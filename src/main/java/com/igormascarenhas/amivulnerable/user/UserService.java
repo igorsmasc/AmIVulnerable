@@ -30,4 +30,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void deleteUser(Integer userId) {
+        boolean exists = userRepository.existsById(userId);
+        if(!exists) {
+            throw new IllegalStateException("User with id " + userId + " does not exists.");
+        }
+        userRepository.deleteById(userId);
+    }
+
 }
