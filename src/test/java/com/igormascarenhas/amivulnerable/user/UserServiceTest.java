@@ -4,12 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -33,8 +34,26 @@ class UserServiceTest {
     }
 
     @Test
-    @Disabled
-    void addNewUser() {
+    void canAddNewUser() {
+        // Given
+        User user = new User(
+                "igor@mail.com",
+                "123",
+                "Igor Santos Mascarenhas"
+        );
+
+        // When
+        underTest.addNewUser(user);
+
+        // Then
+        ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
+
+        verify(userRepository).save(userArgumentCaptor.capture());
+
+        User userCaptured = userArgumentCaptor.getValue();
+
+        assertThat(userCaptured).isEqualTo(user);
+
     }
 
     @Test

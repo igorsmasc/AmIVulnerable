@@ -47,7 +47,7 @@ class DeviceServiceTest {
                 "iPhone 12 Pro Max");
 
         // When
-            underTest.addNewDevice(device);
+        underTest.addNewDevice(device);
 
         // Then
         ArgumentCaptor<Device> deviceArgumentCaptor =
