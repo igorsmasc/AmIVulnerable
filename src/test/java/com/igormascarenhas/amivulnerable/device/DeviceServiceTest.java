@@ -80,4 +80,20 @@ class DeviceServiceTest {
         verify(deviceRepository).deleteById(id);
     }
 
+    @Test
+    void willThrowWhenDeleteDeviceNotFound() {
+        // Given
+        Integer id = 7;
+        given(deviceRepository.existsById(id))
+                .willReturn(false);
+
+        // When
+        // Then
+        assertThatThrownBy(() -> underTest.deleteDevice(id))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("Device with id " + id + " does not exists.");
+
+        verify(deviceRepository, never()).deleteById(any());
+    }
+
 }
