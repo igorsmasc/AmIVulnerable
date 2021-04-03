@@ -102,4 +102,20 @@ class UserServiceTest {
         // Then
         verify(userRepository).deleteById(id);
     }
+
+    @Test
+    void willThrowWhenDeleteUserNotFound() {
+        // Given
+        Integer id = 7;
+        given(userRepository.existsById(id))
+                .willReturn(false);
+
+        // When
+        // Then
+        assertThatThrownBy(() -> underTest.deleteUser(id))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("User with id " + id + " does not exists.");
+
+        verify(userRepository, never()).deleteById(any());
+    }
 }
