@@ -16,7 +16,7 @@ public class DeviceService {
         this.deviceRepository = deviceRepository;
     }
 
-    public List<Device> getDevices() {
+    public List<Device> getAllDevices() {
         return deviceRepository.findAll();
     }
 

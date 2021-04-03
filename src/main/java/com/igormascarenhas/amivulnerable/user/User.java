@@ -69,7 +69,7 @@ public class User {
         this.name = name;
     }
 
-    public List<Device> getDevices() {
+    public List<Device> getAllDevices() {
         return devices;
     }
 

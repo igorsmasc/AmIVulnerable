@@ -22,8 +22,8 @@ public class DeviceController {
 
     @GetMapping("/devices")
     @ApiOperation(value = "GET ALL DEVICES")
-    public List<Device> getDevices() {
-        return deviceService.getDevices();
+    public List<Device> getAllDevices() {
+        return deviceService.getAllDevices();
     }
 
     @GetMapping("/device")

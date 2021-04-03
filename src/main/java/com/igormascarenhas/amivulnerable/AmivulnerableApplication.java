@@ -47,8 +47,8 @@ public class AmivulnerableApplication implements CommandLineRunner {
 //		d1.getAllVulnerabilities().addAll(List.of(v1, v2));
 //		d2.getAllVulnerabilities().addAll(List.of(v3));
 
-//		igor.getDevices().addAll(List.of(d1));
-//		amanda.getDevices().addAll(List.of(d2));
+//		igor.getAllDevices().addAll(List.of(d1));
+//		amanda.getAllDevices().addAll(List.of(d2));
 
 		vulnerabilityRepository.saveAll(List.of(v1, v2, v3));
 		userRepository.saveAll(List.of(igor, amanda));
