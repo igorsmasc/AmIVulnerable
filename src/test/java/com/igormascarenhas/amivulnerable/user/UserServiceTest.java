@@ -90,7 +90,16 @@ class UserServiceTest {
     }
 
     @Test
-    @Disabled
-    void deleteUser() {
+    void canDeleteUser() {
+        // Given
+        Integer id = 7;
+        given(userRepository.existsById(id))
+                .willReturn(true);
+
+        // When
+        underTest.deleteUser(id);
+
+        // Then
+        verify(userRepository).deleteById(id);
     }
 }
