@@ -4,12 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class DeviceServiceTest {
@@ -38,7 +39,25 @@ class DeviceServiceTest {
     }
 
     @Test
-    @Disabled
-    void addNewDevice() {
+    void canAddNewDevice() {
+        // Given
+        Device device = new Device(
+                "ios",
+                "14",
+                "iPhone 12 Pro Max");
+
+        // When
+            underTest.addNewDevice(device);
+
+        // Then
+        ArgumentCaptor<Device> deviceArgumentCaptor =
+                ArgumentCaptor.forClass(Device.class);
+
+        verify(deviceRepository).save(deviceArgumentCaptor.capture());
+
+        Device capturedDevice = deviceArgumentCaptor.getValue();
+
+        assertThat(capturedDevice).isEqualTo(device);
+
     }
 }
