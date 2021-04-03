@@ -22,8 +22,8 @@ public class UserController {
 
     @GetMapping("/users")
     @ApiOperation(value = "GET ALL USERS")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @PostMapping("/user")
