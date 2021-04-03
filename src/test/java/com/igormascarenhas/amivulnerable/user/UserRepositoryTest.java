@@ -1,7 +1,6 @@
 package com.igormascarenhas.amivulnerable.user;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -12,11 +11,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class UserRepositoryTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository underTest;
 
     @AfterEach
     void tearDown() {
-        userRepository.deleteAll();
+        underTest.deleteAll();
     }
 
     @Test
@@ -28,10 +27,10 @@ class UserRepositoryTest {
                 "123",
                 "Igor Santos Mascarenhas"
         );
-        userRepository.save(user);
+        underTest.save(user);
 
         // When
-        boolean expected = userRepository.findUserByEmail(email).isPresent();
+        boolean expected = underTest.findUserByEmail(email).isPresent();
 
         // Then
         assertThat(expected).isTrue();
@@ -43,7 +42,7 @@ class UserRepositoryTest {
         String email = "notfound@mail.com";
 
         // When
-        boolean expected = userRepository.findUserByEmail(email).isPresent();
+        boolean expected = underTest.findUserByEmail(email).isPresent();
 
         // Then
         assertThat(expected).isFalse();

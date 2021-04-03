@@ -44,8 +44,8 @@ public class AmivulnerableApplication implements CommandLineRunner {
 		Device d1 = new Device(1, "android", "10", "s10");
 		Device d2 = new Device(2, "iphone", "10", "lite");
 //
-//		d1.getVulnerabilities().addAll(List.of(v1, v2));
-//		d2.getVulnerabilities().addAll(List.of(v3));
+//		d1.getAllVulnerabilities().addAll(List.of(v1, v2));
+//		d2.getAllVulnerabilities().addAll(List.of(v3));
 
 //		igor.getDevices().addAll(List.of(d1));
 //		amanda.getDevices().addAll(List.of(d2));
