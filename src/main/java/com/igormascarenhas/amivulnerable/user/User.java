@@ -1,90 +1,105 @@
 package com.igormascarenhas.amivulnerable.user;
 
 import com.igormascarenhas.amivulnerable.device.Device;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "\"User\"")
-public class User {
+public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long id;
+    private String name;
+    private String username;
     private String email;
     private String password;
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+    private Boolean locked;
+    private Boolean enabled;
 
     @Access(AccessType.PROPERTY)
     @OneToMany(targetEntity = Device.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "ud_fk", referencedColumnName = "id")
     private List<Device> devices;
 
-    public User() {
-    }
-
-    public User(Integer id, String email, String password, String name) {
-        this.id = id;
+    public User(
+            String name,
+            String username,
+            String email,
+            String password,
+            UserRole userRole,
+            Boolean locked,
+            Boolean enabled) {
+        this.name = name;
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.name = name;
+        this.userRole = userRole;
+        this.locked = locked;
+        this.enabled = enabled;
     }
 
-    public User(String email, String password, String name) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(userRole.name());
+        return Collections.singletonList(authority);
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Device> getDevices() {
-        return devices;
-    }
-
-    public void setDevices(List<Device> devices) {
-        this.devices = devices;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", devices=" + devices +
-                '}';
+    public boolean isAccountNonExpired() {
+        return true;
     }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+
+
 }

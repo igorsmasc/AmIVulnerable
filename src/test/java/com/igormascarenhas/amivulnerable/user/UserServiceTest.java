@@ -43,10 +43,15 @@ class UserServiceTest {
     @Test
     void canAddNewUser() {
         // Given
+
         User user = new User(
+                "Igor Mascarenhas",
+                "igor_masc",
                 "igor@mail.com",
                 "123",
-                "Igor Santos Mascarenhas"
+                UserRole.USER,
+                false,
+                true
         );
 
         // When
@@ -67,10 +72,15 @@ class UserServiceTest {
     void willThrowWhenEmailIsTaken() {
         // Given
         User user = new User(
+                "Igor Mascarenhas",
+                "igor_masc",
                 "igor@mail.com",
                 "123",
-                "Igor Santos Mascarenhas"
+                UserRole.USER,
+                false,
+                true
         );
+
 
         Optional<User> userOptional = Optional.of(user);
 
@@ -90,7 +100,7 @@ class UserServiceTest {
     @Test
     void canDeleteUser() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(userRepository.existsById(id))
                 .willReturn(true);
 
@@ -104,7 +114,7 @@ class UserServiceTest {
     @Test
     void willThrowWhenDeleteUserNotFound() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(userRepository.existsById(id))
                 .willReturn(false);
 

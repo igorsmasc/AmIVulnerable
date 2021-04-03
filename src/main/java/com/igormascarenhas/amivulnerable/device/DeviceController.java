@@ -39,7 +39,7 @@ public class DeviceController {
     }
 
     @DeleteMapping(path = "/device/{deviceId}")
-    public void deleteDevice(@PathVariable("deviceId") Integer id) {
+    public void deleteDevice(@PathVariable("deviceId") Long id) {
         deviceService.deleteDevice(id);
     }
 }
