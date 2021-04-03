@@ -9,6 +9,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.BDDMockito.given;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -60,4 +65,19 @@ class DeviceServiceTest {
         assertThat(capturedDevice).isEqualTo(device);
 
     }
+
+    @Test
+    void canDeleteDevice() {
+        // Given
+        Integer id = 7;
+        given(deviceRepository.existsById(id))
+                .willReturn(true);
+
+        // When
+        underTest.deleteDevice(id);
+
+        // Then
+        verify(deviceRepository).deleteById(id);
+    }
+
 }
