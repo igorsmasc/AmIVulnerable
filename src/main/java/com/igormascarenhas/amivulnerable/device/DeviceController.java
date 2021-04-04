@@ -36,6 +36,7 @@ public class DeviceController {
     }
 
     @DeleteMapping(path = "/device/{deviceId}")
+    @ApiOperation(value = "DELETE A DEVICE")
     public void deleteDevice(@PathVariable("deviceId") Long id) {
         deviceService.deleteDevice(id);
     }
