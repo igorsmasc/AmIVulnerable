@@ -15,6 +15,9 @@
 	<description>TCC 2</description>
 	<properties>
 		<java.version>11</java.version>
+		<sonar.projectKey>igorsmasc_AmIVulnerable</sonar.projectKey>
+		<sonar.organization>igorsmasc</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
