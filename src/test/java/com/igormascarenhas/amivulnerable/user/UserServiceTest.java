@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -24,11 +25,12 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new UserService(userRepository);
+        underTest = new UserService(userRepository, bCryptPasswordEncoder);
     }
 
     @Test
@@ -45,13 +47,11 @@ class UserServiceTest {
         // Given
 
         User user = new User(
-                "Igor Mascarenhas",
-                "igor_masc",
+                "Igor",
+                "Mascarenhas",
                 "igor@mail.com",
                 "123",
-                UserRole.USER,
-                false,
-                true
+                UserRole.USER
         );
 
         // When
@@ -72,15 +72,12 @@ class UserServiceTest {
     void willThrowWhenEmailIsTaken() {
         // Given
         User user = new User(
-                "Igor Mascarenhas",
-                "igor_masc",
+                "Igor",
+                "Mascarenhas",
                 "igor@mail.com",
                 "123",
-                UserRole.USER,
-                false,
-                true
+                UserRole.USER
         );
-
 
         Optional<User> userOptional = Optional.of(user);
 

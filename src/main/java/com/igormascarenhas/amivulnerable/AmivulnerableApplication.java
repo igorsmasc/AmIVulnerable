@@ -40,22 +40,18 @@ public class AmivulnerableApplication implements CommandLineRunner {
 		Vulnerability v3 = new Vulnerability("test vul 3", 5);
 
 		User igor = new User(
-				"Igor Mascarenhas",
-				"igor_masc",
+				"Igor",
+				"Mascarenhas",
 				"igor2@mail.com",
 				"123",
-				UserRole.USER,
-				false,
-				true
+				UserRole.USER
 		);
 		User amanda = new User(
-				"Amanda Mascarenhas",
-				"amanda_masc",
+				"Amanda",
+				"Mascarenhas",
 				"amanda2@mail.com",
 				"123",
-				UserRole.USER,
-				false,
-				true
+				UserRole.USER
 		);
 
 		Device d1 = new Device("android", "10", "s10");
