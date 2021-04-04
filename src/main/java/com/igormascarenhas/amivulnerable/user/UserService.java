@@ -38,13 +38,16 @@ public class UserService implements UserDetailsService {
                 .isPresent();
 
         if(userExists) {
+
+            // TODO: if email not confirmed send confirmation email
+
             throw new IllegalStateException("Email already taken");
         }
 
-        String encondedPassword = bCryptPasswordEncoder
+        String encodedPassword = bCryptPasswordEncoder
                 .encode(user.getPassword());
 
-        user.setPassword(encondedPassword);
+        user.setPassword(encodedPassword);
 
         userRepository.save(user);
 
@@ -57,8 +60,6 @@ public class UserService implements UserDetailsService {
         );
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-        // TODO: Send Email
 
         return token;
     }
