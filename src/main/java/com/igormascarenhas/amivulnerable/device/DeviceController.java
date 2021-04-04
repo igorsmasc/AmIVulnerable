@@ -2,6 +2,7 @@ package com.igormascarenhas.amivulnerable.device;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,10 @@ import java.util.List;
 @RequestMapping(path = "/api")
 @Api(value = "REST API - DEVICE")
 @CrossOrigin(origins = "*") //All domains can access it
+@AllArgsConstructor
 public class DeviceController {
 
     private final DeviceService deviceService;
-
-    @Autowired
-    public DeviceController(DeviceService deviceService) {
-        this.deviceService = deviceService;
-    }
 
     @GetMapping("/devices")
     @ApiOperation(value = "GET ALL DEVICES")
