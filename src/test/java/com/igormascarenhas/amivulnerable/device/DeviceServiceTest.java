@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.mockito.Mockito.verify;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.BDDMockito.given;
 
@@ -69,7 +68,7 @@ class DeviceServiceTest {
     @Test
     void canDeleteDevice() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(deviceRepository.existsById(id))
                 .willReturn(true);
 
@@ -83,7 +82,7 @@ class DeviceServiceTest {
     @Test
     void willThrowWhenDeleteDeviceNotFound() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(deviceRepository.existsById(id))
                 .willReturn(false);
 

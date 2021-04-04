@@ -23,9 +23,11 @@ class UserRepositoryTest {
         // Given
         String email = "igor@mail.com";
         User user = new User(
+                "Igor",
+                "Mascarenhas",
                 email,
                 "123",
-                "Igor Santos Mascarenhas"
+                UserRole.USER
         );
         underTest.save(user);
 

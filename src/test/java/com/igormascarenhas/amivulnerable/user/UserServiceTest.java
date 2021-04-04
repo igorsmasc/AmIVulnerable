@@ -1,12 +1,13 @@
 package com.igormascarenhas.amivulnerable.user;
 
+import com.igormascarenhas.amivulnerable.registration.token.ConfirmationTokenService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Optional;
 
@@ -24,11 +25,13 @@ class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private ConfirmationTokenService confirmationTokenService;
     private UserService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new UserService(userRepository);
+        underTest = new UserService(userRepository, bCryptPasswordEncoder, confirmationTokenService);
     }
 
     @Test
@@ -43,10 +46,13 @@ class UserServiceTest {
     @Test
     void canAddNewUser() {
         // Given
+
         User user = new User(
+                "Igor",
+                "Mascarenhas",
                 "igor@mail.com",
                 "123",
-                "Igor Santos Mascarenhas"
+                UserRole.USER
         );
 
         // When
@@ -67,9 +73,11 @@ class UserServiceTest {
     void willThrowWhenEmailIsTaken() {
         // Given
         User user = new User(
+                "Igor",
+                "Mascarenhas",
                 "igor@mail.com",
                 "123",
-                "Igor Santos Mascarenhas"
+                UserRole.USER
         );
 
         Optional<User> userOptional = Optional.of(user);
@@ -90,7 +98,7 @@ class UserServiceTest {
     @Test
     void canDeleteUser() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(userRepository.existsById(id))
                 .willReturn(true);
 
@@ -104,7 +112,7 @@ class UserServiceTest {
     @Test
     void willThrowWhenDeleteUserNotFound() {
         // Given
-        Integer id = 7;
+        Long id = 7L;
         given(userRepository.existsById(id))
                 .willReturn(false);
 

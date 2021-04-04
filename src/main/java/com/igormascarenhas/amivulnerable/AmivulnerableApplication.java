@@ -4,6 +4,7 @@ import com.igormascarenhas.amivulnerable.device.Device;
 import com.igormascarenhas.amivulnerable.device.DeviceRepository;
 import com.igormascarenhas.amivulnerable.user.User;
 import com.igormascarenhas.amivulnerable.user.UserRepository;
+import com.igormascarenhas.amivulnerable.user.UserRole;
 import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
 import com.igormascarenhas.amivulnerable.vulnerability.VulnerabilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,23 @@ public class AmivulnerableApplication implements CommandLineRunner {
 		Vulnerability v2 = new Vulnerability("test vul 2", 3);
 		Vulnerability v3 = new Vulnerability("test vul 3", 5);
 
-		User igor = new User("1", "igor@mail.com", "Igor");
-		User amanda = new User("2", "amanda@mail.com", "Amanda");
+		User igor = new User(
+				"Igor",
+				"Mascarenhas",
+				"igor2@mail.com",
+				"123",
+				UserRole.USER
+		);
+		User amanda = new User(
+				"Amanda",
+				"Mascarenhas",
+				"amanda2@mail.com",
+				"123",
+				UserRole.USER
+		);
 
-		Device d1 = new Device(1, "android", "10", "s10");
-		Device d2 = new Device(2, "iphone", "10", "lite");
+		Device d1 = new Device("android", "10", "s10");
+		Device d2 = new Device("iphone", "10", "lite");
 //
 //		d1.getAllVulnerabilities().addAll(List.of(v1, v2));
 //		d2.getAllVulnerabilities().addAll(List.of(v3));
