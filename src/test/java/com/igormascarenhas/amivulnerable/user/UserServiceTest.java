@@ -1,7 +1,7 @@
 package com.igormascarenhas.amivulnerable.user;
 
+import com.igormascarenhas.amivulnerable.registration.token.ConfirmationTokenService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -26,11 +26,12 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private ConfirmationTokenService confirmationTokenService;
     private UserService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new UserService(userRepository, bCryptPasswordEncoder);
+        underTest = new UserService(userRepository, bCryptPasswordEncoder, confirmationTokenService);
     }
 
     @Test
