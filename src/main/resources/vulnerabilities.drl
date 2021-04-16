@@ -1,0 +1,10 @@
+package KieRule;
+import com.igormascarenhas.amivulnerable.device.Vulnerabilities;
+
+rule "1"
+
+when
+    vulnerabilitiesObject : Vulnerabilities(findVulnerability(1));
+then
+    vulnerabilitiesObject.addtVulnerability(2);
+end;

@@ -35,9 +35,8 @@ public class AmivulnerableApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Vulnerability v1 = new Vulnerability("test vul 1", 1);
-		Vulnerability v2 = new Vulnerability("test vul 2", 3);
-		Vulnerability v3 = new Vulnerability("test vul 3", 5);
+		Vulnerability v1 = new Vulnerability(1L, "utiliza estações de carregamento", 1);
+		Vulnerability v2 = new Vulnerability(2L,"possibilidade ataque via estação de carregamento", 3);
 
 		User igor = new User(
 				"Igor",
@@ -46,25 +45,18 @@ public class AmivulnerableApplication implements CommandLineRunner {
 				"123",
 				UserRole.USER
 		);
-		User amanda = new User(
-				"Amanda",
-				"Mascarenhas",
-				"amanda2@mail.com",
-				"123",
-				UserRole.USER
-		);
 
 		Device d1 = new Device("android", "10", "s10");
-		Device d2 = new Device("iphone", "10", "lite");
+
 //
-//		d1.getAllVulnerabilities().addAll(List.of(v1, v2));
-//		d2.getAllVulnerabilities().addAll(List.of(v3));
 
-//		igor.getAllDevices().addAll(List.of(d1));
-//		amanda.getAllDevices().addAll(List.of(d2));
 
-		vulnerabilityRepository.saveAll(List.of(v1, v2, v3));
-		userRepository.saveAll(List.of(igor, amanda));
-		deviceRepository.saveAll(List.of(d1, d2));
+		vulnerabilityRepository.saveAll(List.of(v1, v2));
+		userRepository.saveAll(List.of(igor));
+		deviceRepository.saveAll(List.of(d1));
+
+		igor.setDevices(List.of(d1));
+		userRepository.saveAll(List.of(igor));
+
 	}
 }

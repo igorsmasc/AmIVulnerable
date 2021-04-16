@@ -34,7 +34,11 @@ public class Device {
     @OneToMany(targetEntity = Vulnerability.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "dv_fk", referencedColumnName = "id")
     private List<Vulnerability> vulnerabilities;
-//    private List<Vulnerability> result;
+
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = Vulnerability.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "dv_fk", referencedColumnName = "id")
+    private List<Vulnerability> questions;
 
 
     public Device(
