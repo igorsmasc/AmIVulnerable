@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -22,10 +23,10 @@ public class DeviceController {
         return deviceService.getAllDevices();
     }
 
-    @GetMapping("/device")
+    @GetMapping("/device/{deviceId}")
     @ApiOperation(value = "GET DEVICE BY ID")
-    public Device getDevice() {
-        return deviceService.getDevice();
+    public Optional<Device> getDevice(@PathVariable("deviceId") Long id) {
+        return deviceService.getDevice(id);
     }
 
     @PostMapping("/device")

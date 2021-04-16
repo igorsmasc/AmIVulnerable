@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,8 +16,13 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
-    public Device getDevice() {
-        return new Device("android", "10", "s10");
+    public Optional<Device> getDevice(Long deviceId) {
+        boolean exists = deviceRepository.existsById(deviceId);
+        if(!exists) {
+            throw new IllegalStateException("Device with id " + deviceId + " does not exists.");
+        }
+
+        return deviceRepository.findById(deviceId);
     }
 
     public void addNewDevice(Device device) {

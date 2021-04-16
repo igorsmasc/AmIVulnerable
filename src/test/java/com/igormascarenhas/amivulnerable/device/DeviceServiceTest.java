@@ -38,11 +38,6 @@ class DeviceServiceTest {
     }
 
     @Test
-    @Disabled
-    void getDevice() {
-    }
-
-    @Test
     void canAddNewDevice() {
         // Given
         Device device = new Device(
