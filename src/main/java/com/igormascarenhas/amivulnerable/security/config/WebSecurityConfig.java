@@ -1,6 +1,5 @@
 package com.igormascarenhas.amivulnerable.security.config;
 
-import com.igormascarenhas.amivulnerable.user.User;
 import com.igormascarenhas.amivulnerable.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/api/registration/**")
+                    .antMatchers("/api/**")
                     .permitAll()
                 .anyRequest()
                 .authenticated().and()
