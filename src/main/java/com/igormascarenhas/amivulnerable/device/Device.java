@@ -1,5 +1,6 @@
 package com.igormascarenhas.amivulnerable.device;
 
+import com.igormascarenhas.amivulnerable.rule.Rule;
 import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
 import lombok.*;
 
@@ -36,9 +37,9 @@ public class Device {
     private List<Vulnerability> vulnerabilities;
 
     @Access(AccessType.PROPERTY)
-    @OneToMany(targetEntity = Vulnerability.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "dv_fk", referencedColumnName = "id")
-    private List<Vulnerability> questions;
+    @OneToMany(targetEntity = Rule.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "rv_fk", referencedColumnName = "id")
+    private List<Rule> rules;
 
 
     public Device(
@@ -49,5 +50,11 @@ public class Device {
         this.os_version = os_version;
         this.model = model;
     }
+
+    public void addRule(Rule rule) {
+        rules.add(rule);
+    }
+
+    public void addVulnerability(Vulnerability vulnerability) {vulnerabilities.add(vulnerability);}
 
 }

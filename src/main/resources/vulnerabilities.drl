@@ -1,10 +1,93 @@
 package KieRule;
-import com.igormascarenhas.amivulnerable.device.Vulnerabilities;
+import com.igormascarenhas.amivulnerable.device.RuleVul;
 
 rule "1"
 
 when
-    vulnerabilitiesObject : Vulnerabilities(findVulnerability(1));
+    ruleVulObject : RuleVul(findVulnerability(1));
 then
-    vulnerabilitiesObject.addtVulnerability(2);
+    ruleVulObject.addVulnerability(2);
+    ruleVulObject.addRule(1);
 end;
+
+rule "2"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(3));
+then
+    ruleVulObject.addVulnerability(4);
+    ruleVulObject.addRule(2);
+end;
+
+rule "3"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(5) && findVulnerability(6));
+then
+    ruleVulObject.addVulnerability(7);
+    ruleVulObject.addRule(3);
+end;
+
+rule "4"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(8));
+then
+    ruleVulObject.addVulnerability(9);
+    ruleVulObject.addRule(4);
+end;
+
+rule "5"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(10) || findVulnerability(11));
+then
+    ruleVulObject.addVulnerability(7);
+    ruleVulObject.addRule(5);
+end;
+
+rule "6"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(13) || findVulnerability(11));
+then
+    ruleVulObject.addVulnerability(2);
+    ruleVulObject.addRule(7);
+end;
+
+rule "7"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(7) && findVulnerability(9));
+then
+    ruleVulObject.addVulnerability(10001);
+    ruleVulObject.addRule(7);
+end;
+
+rule "8"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(7) && findVulnerability(9) && findVulnerability(4));
+then
+    ruleVulObject.addVulnerability(10002);
+    ruleVulObject.addRule(8);
+end;
+
+rule "9"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(21) && findVulnerability(22));
+then
+    ruleVulObject.addVulnerability(23);
+    ruleVulObject.addRule(9);
+end;
+
+rule "10"
+
+when
+    ruleVulObject : RuleVul(findVulnerability(24));
+then
+    ruleVulObject.addVulnerability(2);
+    ruleVulObject.addRule(10003);
+end;
+

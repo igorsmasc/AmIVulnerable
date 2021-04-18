@@ -1,5 +1,7 @@
 package com.igormascarenhas.amivulnerable.device;
 
+import com.igormascarenhas.amivulnerable.rule.Rule;
+import com.igormascarenhas.amivulnerable.rule.RuleService;
 import com.igormascarenhas.amivulnerable.vulnerability.Vulnerability;
 import com.igormascarenhas.amivulnerable.vulnerability.VulnerabilityService;
 import io.swagger.annotations.Api;
@@ -21,6 +23,7 @@ public class DeviceController {
 
     private final DeviceService deviceService;
     private final VulnerabilityService vulnerabilityService;
+    private final RuleService ruleService;
     private KieSession session;
 
     @GetMapping("/devices")
@@ -42,18 +45,17 @@ public class DeviceController {
     }
 
     @PostMapping("/device/{deviceid}/scan")
-    @ApiOperation(value = "REGISTER A NEW DEVICE")
-    public void doScan(@RequestBody Vulnerabilities vulnerabilities) {
+    @ApiOperation(value = "SCAN A DEVICE")
+    public void doScan(@RequestBody RuleVul ruleVul, @PathVariable("deviceid") Long deviceId) {
 
-        Device device = deviceService.getDevice(vulnerabilities.getDeviceId()).get();
-        ArrayList<Vulnerability> vulnerabilityList = new ArrayList<Vulnerability>();
+        Device device = deviceService.getDevice(deviceId).get();
 
-        session.insert(vulnerabilities);
+        session.insert(ruleVul);
         session.fireAllRules();
 
-        vulnerabilities.getVulnerabilitiesList().forEach(vul -> vulnerabilityList.add(vulnerabilityService.getVulnerabilityById(vul.longValue()).get()));
+        ruleVul.getVulnerabilitiesList().forEach(vulId -> device.addVulnerability(vulnerabilityService.getVulnerabilityById(vulId.longValue()).get()));
 
-        device.setVulnerabilities(vulnerabilityList);
+        ruleVul.getRulesList().forEach(ruleId -> device.addRule(ruleService.getRule(ruleId.longValue()).get()));
 
         deviceService.addNewDevice(device);
 
